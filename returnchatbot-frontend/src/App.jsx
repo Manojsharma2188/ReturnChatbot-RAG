@@ -31,6 +31,7 @@ const theme = createTheme({
 function App() {
   const [activeConversation, setActiveConversation] = useState(null);
   const [sidebarRefreshKey, setSidebarRefreshKey] = useState(0);
+  const [chatKey, setChatKey] = useState(0);
 
   const handleSelectConversation = useCallback((conv) => {
     setActiveConversation(conv);
@@ -38,6 +39,7 @@ function App() {
 
   const handleNewChat = useCallback(() => {
     setActiveConversation(null);
+    setChatKey((prev) => prev + 1);
   }, []);
 
   const handleConversationsChanged = useCallback(() => {
@@ -56,6 +58,7 @@ function App() {
         />
         <Box sx={{ flex: 1, overflow: 'hidden' }}>
           <ChatContainer
+            key={chatKey}
             conversation={activeConversation}
             onConversationsChanged={handleConversationsChanged}
           />

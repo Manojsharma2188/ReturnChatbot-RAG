@@ -233,6 +233,15 @@ Returnchatbot/
 
 ### API Endpoints
 
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| POST | `/api/chat` | Plain chat (Free Chat mode) |
+| POST | `/api/chat/rag` | RAG-powered chat (Policy mode) |
+| POST | `/api/chat/new` | Create new conversation |
+| GET | `/api/chat/conversations` | List all conversations |
+| GET | `/api/chat/conversations/{id}/messages` | Get messages for a conversation |
+| DELETE | `/api/chat/conversations/{id}` | Delete a conversation |
+
 #### `POST /api/chat` — Plain Chat (Free Chat mode)
 - **Request:** `{ "prompt": "Hello", "conversationId": null }`
 - **Response:** `{ "response": "...", "role": "assistant", "conversationId": 1 }`
@@ -246,8 +255,8 @@ Returnchatbot/
   2. Search Qdrant for top 5 most similar chunks
   3. Build prompt with retrieved context
   4. Send to Ollama (`llama3.2`) with instruction: *"Answer ONLY using provided context"*
-  5. Save conversation + messages to PostgreSQL
-  6. Return answer
+  5. Save conversation + messages to PostgreSQL (both user query and bot answer)
+  6. Return answer with `conversationId` for history tracking
 
 #### `POST /api/chat/new` — New Conversation
 - **Response:** `{ "id": 1, "title": "Chat with AI - ..." }`
@@ -257,6 +266,10 @@ Returnchatbot/
 
 #### `GET /api/chat/conversations/{id}/messages` — Get Messages
 - **Response:** `[ { "response": "...", "role": "user" }, ... ]`
+
+#### `DELETE /api/chat/conversations/{id}` — Delete Conversation
+- **Response:** `204 No Content`
+- **Flow:** Deletes all messages for the conversation first, then deletes the conversation record
 
 ### RAG Flow (Detailed)
 

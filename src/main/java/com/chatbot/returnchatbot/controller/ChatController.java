@@ -58,4 +58,11 @@ public class ChatController {
     public ResponseEntity<List<ChatResponse>> getConversationMessages(@PathVariable Long id) {
         return ResponseEntity.ok(chatService.getMessagesByConversationId(id));
     }
+
+    @DeleteMapping("/conversations/{id}")
+    public ResponseEntity<Void> deleteConversation(@PathVariable Long id) {
+        log.info("Delete conversation request: {}", id);
+        chatService.deleteConversation(id);
+        return ResponseEntity.noContent().build();
+    }
 }

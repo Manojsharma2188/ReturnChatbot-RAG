@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Box, AppBar, Toolbar, Typography, Switch, FormControlLabel, CircularProgress, Chip } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, Switch, FormControlLabel, Chip } from '@mui/material';
+import { SmartToy } from '@mui/icons-material';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 
@@ -61,6 +62,7 @@ function ChatContainer({ conversation, onConversationsChanged }) {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
 
   const handleSendMessage = async (userMessage) => {
     if (!userMessage.trim()) return;
@@ -190,8 +192,53 @@ function ChatContainer({ conversation, onConversationsChanged }) {
           />
         ))}
         {isLoading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
-            <CircularProgress size={24} sx={{ color: '#667eea' }} />
+          <Box sx={{ display: 'flex', justifyContent: 'flex-start', px: 2, py: 0.5 }}>
+            <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
+              <Box sx={{ mt: 0.5, color: '#764ba2' }}>
+                <SmartToy sx={{ fontSize: 20 }} />
+              </Box>
+              <Box
+                sx={{
+                  p: 2,
+                  borderRadius: 2,
+                  bgcolor: 'white',
+                  borderBottomLeftRadius: 0,
+                  display: 'flex',
+                  gap: 0.5,
+                  alignItems: 'center',
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    bgcolor: '#6b7280',
+                    animation: 'blink 1.4s infinite',
+                  }}
+                />
+                <Box
+                  sx={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    bgcolor: '#6b7280',
+                    animation: 'blink 1.4s infinite',
+                    animationDelay: '0.2s',
+                  }}
+                />
+                <Box
+                  sx={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    bgcolor: '#6b7280',
+                    animation: 'blink 1.4s infinite',
+                    animationDelay: '0.4s',
+                  }}
+                />
+              </Box>
+            </Box>
           </Box>
         )}
         <div ref={messagesEndRef} />

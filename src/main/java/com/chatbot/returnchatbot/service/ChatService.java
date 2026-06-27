@@ -125,4 +125,12 @@ public class ChatService {
         log.info("Saved RAG conversation {} with message and response", conversation.getId());
         return conversation.getId();
     }
+
+    @Transactional
+    public void deleteConversation(Long conversationId) {
+        // Delete all messages first, then the conversation
+        messageRepository.deleteByConversationId(conversationId);
+        conversationRepository.deleteById(conversationId);
+        log.info("Deleted conversation {} and its messages", conversationId);
+    }
 }
