@@ -28,6 +28,11 @@ Instead of answering manually, this chatbot reads your PDF, understands it, and 
 | **Free Chat** 💬 | General AI conversation | Casual chat, brainstorming |
 
 You can toggle between modes with the switch in the header.
+**RAG Enabled**
+<img width="1920" height="1080" alt="Screenshot from 2026-06-27 17-41-03" src="https://github.com/user-attachments/assets/15534334-0eb3-43b0-80ea-d447505933fe" />
+
+**RAG Disabled**
+<img width="1920" height="1080" alt="Screenshot from 2026-06-27 17-47-15" src="https://github.com/user-attachments/assets/4bea7702-9804-4f29-beac-afce17ed2110" />
 
 ---
 
